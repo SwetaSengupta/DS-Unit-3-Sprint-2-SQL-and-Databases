@@ -47,7 +47,7 @@ print("Number of thief: ", resulte)
 
 query2 = "SELECT count(*) FROM armory_item"
 result2 = cursor.execute(query2).fetchall()
-print("Total items: ", result2) 
+#print("Total items: ", result2) 
 
 #How many of the Items are weapons? How many are not?---this is not working
 #query_3 = "SELECT count(*) as total_count FROM armory_weapon"
@@ -63,12 +63,27 @@ result4 = cursor.execute(query4).fetchall()
 print("Total items each character have(only first 20 rows): ", result4)
 
 #How many Weapons does each character have? (Return first 20 rows)
-
+query5 = '''
+SELECT  character_id, count(weapon_id) AS count_weapons 
+  FROM (SELECT ccc.character_id, ccc.name AS character_name,
+		       ai.name as item_name, aw.item_ptr_id as weapon_id
+		  FROM charactercreator_character AS ccc,
+		       charactercreator_character_inventory AS cci,
+		       armory_weapon AS aw,
+		       armory_item AS ai
+		 WHERE ccc.character_id = cci.character_id
+		   AND cci.item_id = ai.item_id
+		   AND ai.item_id = aw.item_ptr_id) AS join_table
+ GROUP BY character_id
+ LIMIT 20
+ '''
+result5 = cursor.execute(query5).fetchall()
+print("Total weapons each character have(only first 20 rows): ", result5)
 
 
 #On average, how many Items does each Character have?
 
-query5 = "SELECT character_id, item_id, AVG(item_id) as item1 FROM charactercreator_character_inventory GROUP BY character_id "
+query5 = "SELECT character_id, item_id, AVG(item_id) as avg_item FROM charactercreator_character_inventory GROUP BY character_id "
 result5 = cursor.execute(query5).fetchall()
 print("Average number of items each character have: ", result5)
 
