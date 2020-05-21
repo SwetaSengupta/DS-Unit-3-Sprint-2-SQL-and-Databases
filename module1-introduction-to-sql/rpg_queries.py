@@ -68,4 +68,7 @@ print("Total items each character have(only first 20 rows): ", result4)
 
 #On average, how many Items does each Character have?
 
-query5 = "SELECT character_id, count(item_id) as item_count FROM charactercreator_character_inventory GROUP BY character_id "
+query5 = "SELECT character_id, item_id, AVG(item_id) as item1 FROM charactercreator_character_inventory GROUP BY character_id "
+result5 = cursor.execute(query5).fetchall()
+print("Average number of items each character have: ", result5)
+
