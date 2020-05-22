@@ -11,8 +11,9 @@ query = '''
     SELECT count(*) FROM review
 '''
 
-result = c.execute(query).fetchall()
-print('Total number of rows: ',result)
+results = c.execute(query).fetchall()
+for row in results:
+    print('Total number of rows: ',row[0])
 
 
 query2 = '''
@@ -21,5 +22,6 @@ SELECT COUNT(*) FROM review
    AND Shopping >= 100
 '''
 
-result2 = c.execute(query2).fetchall()
-print('No of users with atleast 100 shopping and nature reviews: ',result2)
+results2 = c.execute(query2).fetchall()
+for row in results2:
+    print('No of users with atleast 100 shopping and nature reviews: ',row[0])
