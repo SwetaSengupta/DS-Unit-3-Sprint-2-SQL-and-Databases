@@ -23,7 +23,7 @@ cur = conn.cursor()
 f = open('C:/tmp/titanic.csv', 'r')
 cur.copy_from(f, 'titanic', sep=',')
 f.close()
-
+conn.commit()
 
 cur.execute('SELECT * from titanic;')
 ### Note - nothing happened yet! We need to actually *fetch* from the cursor
