@@ -25,11 +25,11 @@ cur.copy_from(f, 'titanic', sep=',')
 f.close()
 conn.commit()
 
-cur.execute('SELECT * from titanic;')
+
+cur.execute('SELECT * From titanic WHERE age < 15;')
 ### Note - nothing happened yet! We need to actually *fetch* from the cursor
 result = cur.fetchall()
 for row in result:
-    print("-------")
-    print(type(row))
+    print("-----------------------------------------------------------------------------")
     print(row)
 
