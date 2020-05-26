@@ -47,7 +47,7 @@ print("Number of thief: ", resulte)
 
 query2 = "SELECT count(*) FROM armory_item"
 result2 = cursor.execute(query2).fetchall()
-#print("Total items: ", result2) 
+print("Total items: ", result2) 
 
 #How many of the Items are weapons? How many are not?---this is not working
 #query_3 = "SELECT count(*) as total_count FROM armory_weapon"
