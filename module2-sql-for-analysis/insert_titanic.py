@@ -27,22 +27,28 @@ conn.commit()
 cur.execute('SELECT * From titanic WHERE age < 15;')
 ### Note - nothing happened yet! We need to actually *fetch* from the cursor
 result = cur.fetchall()
-for row in result:
-    print("-----------------------------------------------------------------------------")
+#for row in result:
+    #print("-----------------------------------------------------------------------------")
+    #print(row)
+
+
+cur.execute('SELECT count(Survived) FROM titanic WHERE Survived = 1;')
+result1 = cur.fetchall()
+for row in result1:
+    print("------------------------------------------------------------------------------")
     print(row)
 
 
 
-"""
-for future reference
-import os
-import pandas
+#for future reference
+#import os
+#import pandas
 
 
-CSV_FILEFATH = os.path.join(os.path.dirname(__file__), ".", "data","titanic.csv")
-df = pd.read_csv(CSV_FILEPATH)
+#CSV_FILEFATH = os.path.join(os.path.dirname(__file__), ".", "data","titanic.csv")
+#df = pd.read_csv(CSV_FILEPATH)
 
-cloud.cursor().execute("""
+#cloud.cursor().execute("""
 #CREATE TABLE Titanic (
     #Survived            INT,
     #Pclass              INT,
@@ -52,18 +58,18 @@ cloud.cursor().execute("""
     #SiblingsSpouses     INT,
     #ParentsChildren     INT,
     #Fare                INT);
-""")
-for row in titanic.values:
-    cloud.cursor().execute("""
+#""")
+#for row in titanic.values:
+    #cloud.cursor().execute("""
     #INSERT INTO Titanic
     #(Survived, Pclass, Name, Sex, Age, SiblingsSpouses, ParentsChildren, Fare)
     #VALUES %s;
-    """, tuple(row)))
-cloud.commit()
+    #""", tuple(row)))
+#cloud.commit()
 
 
 
 
 
 
-"""
+#"""
