@@ -19,12 +19,10 @@ print("CONNECTION", type(conn))
 ### A "cursor", a structure to iterate over db records to perform queries
 cur = conn.cursor()
 
-
 f = open('C:/tmp/titanic.csv', 'r')
 cur.copy_from(f, 'titanic', sep=',')
 f.close()
 conn.commit()
-
 
 cur.execute('SELECT * From titanic WHERE age < 15;')
 ### Note - nothing happened yet! We need to actually *fetch* from the cursor
