@@ -6,15 +6,13 @@ from dotenv import load_dotenv
 import pymongo
 
 
-
-
-
-    # Create your connection.
+# Create your connection.
 DB_FILEPATH = os.path.join(os.path.dirname(__file__),"..","module1-introduction-to-sql", "rpg_db.sqlite3")
 con = sqlite3.connect(DB_FILEPATH)
-data = pd.read_sql_query("SELECT * FROM charactercreator_character;", con)
+
+data = pd.read_sql_query("SELECT * FROM charactercreator_character;", con) #converting into a dataframe
     
-load_dotenv()
+load_dotenv() #loading info from env file
 
 DB_USER = os.getenv("MONGO_USER")
 DB_PASSWORD = os.getenv("MONGO_PASSWORD")
