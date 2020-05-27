@@ -9,13 +9,14 @@ from psycopg2.extras import execute_values
 load_dotenv() # looks inside the .env file for some env vars
 
 # passes env var values to python var
-DB_HOST = os.getenv("DB_HOST", default="OOPS")
-DB_NAME = os.getenv("DB_NAME", default="OOPS")
-DB_USER = os.getenv("DB_USER", default="OOPS")
-DB_PASSWORD = os.getenv("DB_PASSWORD", default="OOPS")
+
+DB_NAME = os.getenv("DB_NAME")
+DB_USER = os.getenv("DB_USER")
+DB_PASSWORD = os.getenv("DB_PASSWORD")
+DB_HOST = os.getenv("DB_HOST") 
 
 #DB_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "data", "rpg_db.sqlite3")
-DB_FILEPATH = os.path.join(os.path.dirname(__file__), "..", "rpg_db.sqlite3")
+DB_FILEPATH = os.path.join(os.path.dirname(__file__),"..","module1-introduction-to-sql", "rpg_db.sqlite3")
 
 class StorageService():
     def __init__(self):
@@ -42,7 +43,7 @@ class StorageService():
             wisdom INT
         );
         """
-        print(create_query)
+        #print(create_query)
         self.pg_cursor.execute(create_query)
         self.pg_connection.commit()
 
@@ -56,6 +57,9 @@ if __name__ == "__main__":
 
     service = StorageService()
 
+    #create table
+    service.create_characters_table()
+
     #
     # EXTRACT AND TRANSFORM
     #
@@ -66,8 +70,4 @@ if __name__ == "__main__":
 
 #
     # LOAD
-    #
-
-    service.create_characters_table()
-
     service.insert_characters(characters)
