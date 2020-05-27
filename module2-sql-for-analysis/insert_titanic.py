@@ -31,3 +31,39 @@ for row in result:
     print("-----------------------------------------------------------------------------")
     print(row)
 
+
+
+"""
+for future reference
+import os
+import pandas
+
+
+CSV_FILEFATH = os.path.join(os.path.dirname(__file__), ".", "data","titanic.csv")
+df = pd.read_csv(CSV_FILEPATH)
+
+cloud.cursor().execute("""
+#CREATE TABLE Titanic (
+    #Survived            INT,
+    #Pclass              INT,
+    #Name                varchar(120),
+    #Sex                 varchar(10),
+    #Age                 INT,
+    #SiblingsSpouses     INT,
+    #ParentsChildren     INT,
+    #Fare                INT);
+""")
+for row in titanic.values:
+    cloud.cursor().execute("""
+    #INSERT INTO Titanic
+    #(Survived, Pclass, Name, Sex, Age, SiblingsSpouses, ParentsChildren, Fare)
+    #VALUES %s;
+    """, tuple(row)))
+cloud.commit()
+
+
+
+
+
+
+"""
