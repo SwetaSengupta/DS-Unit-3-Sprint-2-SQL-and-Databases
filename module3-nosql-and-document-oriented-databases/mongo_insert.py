@@ -1,5 +1,5 @@
-#client = pymongo.MongoClient("mongodb+srv://swetasengupta:<password>@cluster0-fk9rp.mongodb.net/test?retryWrites=true&w=majority")
-#db = client.test
+# client = pymongo.MongoClient("mongodb+srv://swetasengupta:<password>@cluster0-fk9rp.mongodb.net/test?retryWrites=true&w=majority")
+# db = client.test
 
 import pymongo
 import os
@@ -19,11 +19,11 @@ client = pymongo.MongoClient(connection_uri)
 print("----------------")
 print("CLIENT:", type(client), client)
 
-db = client.test_database # "test_database" or whatever you want to call it
+db = client.test_database  # "test_database" or whatever you want to call it
 print("----------------")
 print("DB:", type(db), db)
 
-collection = db.pokemon_test # "pokemon_test" or whatever you want to call it
+collection = db.pokemon_test  # "pokemon_test" or whatever you want to call it
 print("----------------")
 print("COLLECTION:", type(collection), collection)
 
@@ -31,52 +31,33 @@ print("----------------")
 print("COLLECTIONS:")
 print(db.list_collection_names())
 
-collection.insert_one({
-    "name": "Pikachu",
-    "level": 30,
-    "exp": 76000000000,
-    "hp": 400,
-})
-print("DOCS:", collection.count_documents({})) #SELECT count(__) as row_count FROM my_table
-print(collection.count_documents({"name": "Pikachu"}))#this also has the where condition
+collection.insert_one(
+    {"name": "Pikachu", "level": 30, "exp": 76000000000, "hp": 400,}
+)
+print(
+    "DOCS:", collection.count_documents({})
+)  # SELECT count(__) as row_count FROM my_table
+print(
+    collection.count_documents({"name": "Pikachu"})
+)  # this also has the where condition
 
-
-
-
-#query the collection, get results, then loop throughthe results
+# query the collection, get results, then loop throughthe results
 pikas = list(collection.find({"name": "Pikachu"}))
 for pika in pikas:
     print(pika["name"])
 
+    # insert multiple documents
+pelipper = {"name": "Pelipper", "level": 100, "exp": 100000, "hp": 323}
 
-    #insert multiple documents
-pelipper = {
-        "name": "Pelipper",
-        "level": 100,
-        "exp": 100000,
-        "hp":323
-}
+tyraniter = {"name": "Tyraniter", "level": 77, "exp": 48148, "hp": 264}
 
-tyraniter = {
-        "name": "Tyraniter",
-        "level": 77,
-        "exp" :48148,
-        "hp" :264
-
-}
-
-psyduck ={
-      "name" :"Psyduck",
-      "level" : 20,
-      "exp" :23000,
-      "hp" : 100
-
-
-}
-team = [pelipper,tyraniter, psyduck]
+psyduck = {"name": "Psyduck", "level": 20, "exp": 23000, "hp": 100}
+team = [pelipper, tyraniter, psyduck]
 collection.insert_many(team)
-print("DOCS:", collection.count_documents({})) #select count(__) as row count from my_table
+print(
+    "DOCS:", collection.count_documents({})
+)  # select count(__) as row count from my_table
 
-high_levels = list(collection.find({"level":{"$gte":70}}))
+high_levels = list(collection.find({"level": {"$gte": 70}}))
 for doc in high_levels:
     print(doc["name"])
