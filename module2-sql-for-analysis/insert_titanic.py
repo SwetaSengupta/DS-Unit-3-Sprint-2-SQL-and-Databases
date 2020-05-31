@@ -75,10 +75,63 @@ conn.commit()  # actually save the records / run the transaction to insert rows
 # conn.close()
 
 
-cur.execute("SELECT count(Survived) FROM titanic WHERE Survived = 1;")
-result1 = cur.fetchall()
-for row in result1:
-    print(
-        "------------------------------------------------------------------------------"
-    )
-    print(row)
+# - How many passengers survived, and how many died?
+# query1 = "SELECT count(Survived) FROM titanic WHERE Survived = 1;"
+# result1 = cur.execute(query1).fetchall()
+# for row in result1:
+# print(row)
+
+# - How many passengers were in each class?
+# query2 = "SELECT count(pclass) FROM titanic GROUP BY pclass"
+
+
+query2 = "SELECT count(pclass) FROM titanic GROUP BY pclass"
+cur.execute(query2)
+result2 = cur.fetchall()
+print("Number of passengers in each class: ", result2)
+
+# - How many passengers survived/died within each class?
+query3 = "SELECT count(survived) FROM titanic  where survived = 1 GROUP BY pclass"
+cur.execute(query3)
+result3 = cur.fetchall()
+print("Number of passengers  survived in each class: ", result2)
+
+# - What was the average age of survivors vs nonsurvivors?
+querya = "SELECT AVG(age) FROM titanic WHERE survived = 1"
+cur.execute(querya)
+resulta = cur.fetchall()
+for row1 in resulta:
+    print(row1[0])
+queryb = "SELECT AVG(age) FROM titanic WHERE survived = 0"
+cur.execute(queryb)
+resultb = cur.fetchall()
+for row2 in resulta:
+    print(row2[0])
+print("the average age of survivors vs nonsurvivors: ", row1[0] / row2[0])
+
+# - What was the average age of each passenger class?
+query4 = "SELECT AVG(age) FROM titanic GROUP BY pclass"
+cur.execute(query4)
+result4 = cur.fetchall()
+print("Avg age of passengers  of each class: ", result4)
+
+# - What was the average fare by passenger class? By survival?
+query5 = "SELECT AVG(fare) FROM titanic GROUP BY pclass"
+cur.execute(query5)
+result5 = cur.fetchall()
+print("Avg fare of passengers  of each class: ", result5)
+
+# - How many siblings/spouses aboard on average, by passenger class? By survival?
+
+query6 = "SELECT AVG(siblings_spouses_aboard) FROM titanic where survived = 1 GROUP BY pclass"
+cur.execute(query6)
+result6 = cur.fetchall()
+print("Avg fare of passengers  of each class: ", result6)
+
+# - How many parents/children aboard on average, by passenger class? By survival?
+query7 = "SELECT AVG(parents_children_aboard) FROM titanic where survived = 1 GROUP BY pclass"
+cur.execute(query7)
+result7 = cur.fetchall()
+print("Avg fare of passengers  of each class: ", result7)
+
+# - Do any passengers have the same name?

@@ -64,5 +64,21 @@ col_ma.insert_many(df_dict7)
 col_necro.insert_many(df_dict8)
 col_thief.insert_many(df_dict9)
 
-print("DOCS:", col_char.count_documents({}))
-print(col_char.count_documents({"name": "Aliquid iste optio reiciendi"}))
+# print("DOCS:", col_char.count_documents({}))
+# print(col_char.count_documents({"name": "Aliquid iste optio reiciendi"}))
+
+# Total Characters
+print("Total Characters are: ", len(db.rpg_char.distinct("character_id")))
+
+# How many total Items?
+print("Total items are: ", len(col_ar_it.distinct("item_id")))
+
+# - How many of the Items are weapons? How many are not?
+print("Total items are weapons: ", len(col_ar_w.distinct("item_ptr_id")))
+
+print(
+    "Total items not weapons: ",
+    len(col_ar_it.distinct("item_id")) - len(col_ar_w.distinct("item_ptr_id")),
+)
+
+# - How many Items does each character have? (Return first 20 rows)
