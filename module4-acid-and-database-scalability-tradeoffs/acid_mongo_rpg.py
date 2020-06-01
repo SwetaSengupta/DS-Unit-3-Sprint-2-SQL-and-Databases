@@ -82,3 +82,6 @@ print(
 )
 
 # - How many Items does each character have? (Return first 20 rows)
+# "SELECT character_id, count(item_id) as item_count FROM charactercreator_character_inventory GROUP BY character_id LIMIT 20"
+#https://kb.objectrocket.com/mongo-db/mongodb-group-by-multiple-fields-using-aggregation-function-464
+print(db.db.rpg_inv.aggregate([{$group : {_id: character_id, count: {$sum: 1}}}]))
