@@ -133,5 +133,3 @@ query7 = "SELECT AVG(parents_children_aboard) FROM titanic where survived = 1 GR
 cur.execute(query7)
 result7 = cur.fetchall()
 print("Avg fare of passengers  of each class: ", result7)
-
-# - Do any passengers have the same name?
